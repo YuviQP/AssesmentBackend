@@ -10,13 +10,14 @@ const favSchema=new Schema({
     link:{
         type:String,
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    }
 },{ 
   timestamps: true,
 });
-userSchema.pre('save',async function(){
-  if(this.password && this.isModified('password')){
-    this.password=await bcrypt.hash(this.password, 10)
-  }
-});
+
 const Fav=model('Fav',favSchema);
 module.exports=Fav;

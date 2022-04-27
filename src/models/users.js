@@ -2,11 +2,11 @@ const { MongoCredentials } = require('mongodb');
 const { Schema, model, models }=require('mongoose');
 const bcrypt=require('bcrypt')
 
-const passwordRegexp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
 const emailRegexp=/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/
 const userSchema=new Schema({
     email: {
         type: String,
+        required:[true,'el email es obligatorio'],
         match:emailRegexp,
         validate: [
           {
@@ -25,7 +25,7 @@ const userSchema=new Schema({
         
     password:{
         type:String,
-        match:passwordRegexp,
+        required:[true,'la contrase;a es obligatoria'],
     },
     favs:{
         type:[{
